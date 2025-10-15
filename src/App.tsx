@@ -172,7 +172,7 @@ function App() {
             <DisplayDate selectedDate={selectedDate} />
             <ButtonTarget
                 showDateForm={showDateForm}
-                onClick={() => handleShowDateForm}
+                onClick={handleShowDateForm}
             />
 
             {/* Modal */}
