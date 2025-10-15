@@ -15,27 +15,30 @@ function App() {
     const [totalDays, setTotalDays] = useState(0);
     const [workDays, setWorkDays] = useState(0);
     const [nextHolliday, setNextHolliday] = useState<Date | null>(null);
-    const [position, setPostion] = useState<{ y: number; x: number }>({ y: 0, x: 0 });
+    const [position, setPostion] = useState<{ y: number; x: number }>({
+        y: 0,
+        x: 0,
+    });
 
     function handleShowDateForm(e: Event) {
         setShowDateForm(!showDateForm);
 
         //najdemo pozicijo gumba
-        const rect = (e.target as HTMLElement)
-            .closest("button")
+        const rect = (e.target as HTMLElement)!
+            .closest("button")!
             .getBoundingClientRect();
         setPostion({
             x: window.innerWidth - rect.width - rect.x,
             y: Math.floor(rect.y + rect.height),
             // y: Math.floor(rect.y + rect.height)
         });
-        console.log(rect);
+        // console.log(rect);
     }
 
     function handleSelectDate(value: Date) {
         setSelectedDate(value);
         localStorage.setItem("setDatum", value.toString());
-        setShowDateForm(false)
+        setShowDateForm(false);
     }
 
     useEffect(
@@ -169,7 +172,7 @@ function App() {
             <DisplayDate selectedDate={selectedDate} />
             <ButtonTarget
                 showDateForm={showDateForm}
-                onClick={handleShowDateForm}
+                onClick={() => handleShowDateForm}
             />
 
             {/* Modal */}

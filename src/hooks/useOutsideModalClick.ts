@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export function useOutsideModalClick(handler: () => void){
-    const ref = useRef(null)
+    const ref = useRef<any | null>(null)
 
     useEffect(function(){
         // handleClick more bit, da lahko tudi naredimo cleanup

@@ -10,9 +10,9 @@ function DateSelector({
     selectedDate: Date;
     setSelectedDate: (arg: Date) => void;
     position: { y: number, x: number };
-    setShowDateForm: () => void;
+    setShowDateForm: (arg: boolean) => void;
 }) {
-    const { ref } = useOutsideModalClick(setShowDateForm);
+    const { ref } = useOutsideModalClick(()=>setShowDateForm(true));
 
     return (
         <div role="overlay" className="fixed items-center justify-center top-0 left-0 w-[100%] h-[100vh] z-1000 transition-all duration-[0.5s]">
