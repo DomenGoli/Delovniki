@@ -20,7 +20,7 @@ function App() {
         x: 0,
     });
 
-    function handleShowDateForm(e: Event) {
+    function handleShowDateForm(e: React.FormEvent) {
         setShowDateForm(!showDateForm);
 
         //najdemo pozicijo gumba
@@ -172,7 +172,7 @@ function App() {
             <DisplayDate selectedDate={selectedDate} />
             <ButtonTarget
                 showDateForm={showDateForm}
-                onClick={handleShowDateForm}
+                onClick={(e)=> handleShowDateForm(e)}
             />
 
             {/* Modal */}
