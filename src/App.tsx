@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import "./App.css";
 import ButtonTarget from "./components/ButtonTarget";
 import DisplayResult from "./components/DisplayResults";
@@ -19,6 +19,10 @@ function App() {
         y: 0,
         x: 0,
     });
+
+    
+    const ref = useRef<Date | null>(null) // fix stale state
+    ref.current = nextHolliday // fix stale state
 
     function handleShowDateForm(e: React.FormEvent) {
         setShowDateForm(!showDateForm);
@@ -139,12 +143,13 @@ function App() {
                     count++;
 
                 // Nastavi nasledni praznik med tednom
-                if (!nextHolliday) {
+                if (!ref.current) {
                     if (
                         (notWeekend(dayOfWeak) &&
                             hollidays.includes(dayMonthString)) ||
                         easterDates.includes(easterString)
                     ) {
+                        ref.current = new Date(currentDate) // fix stale state
                         setNextHolliday(new Date(currentDate));
                     }
                 }
