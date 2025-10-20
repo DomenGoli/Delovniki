@@ -161,7 +161,7 @@ function App() {
     );
 
     return (
-        <div className="relative lg:w-[38rem] lg:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl p-[1rem] transition-all duration-2000">
+        <div className="relative lg:w-[38rem] lg:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl lg:gap-0 gap-12 p-[1rem] transition-all duration-2000">
             <Title />
 
             <div className="flex gap-10">
