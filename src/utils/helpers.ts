@@ -3,5 +3,6 @@ export function getDateFormat(date: Date) {
             day: "numeric",
             month: "long",
             year: "numeric",
+            weekday: "short"
         }).format(date);
     }

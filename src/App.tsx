@@ -6,23 +6,28 @@ import NextHolliday from "./components/NextHolliday";
 import Title from "./components/Title";
 import DateSelector from "./components/DateSelector";
 import DisplayDate from "./components/DisplayDate";
+import ButtonDopust from "./components/ButtonDopust";
+import VacationInput from "./components/VacationInput";
 
 function App() {
     const [showDateForm, setShowDateForm] = useState(false);
+    const [showVacationInput, setShowVacationInput] = useState(false);
     const [selectedDate, setSelectedDate] = useState<Date>(
         new Date(localStorage.getItem("setDatum") || new Date(1970, 0, 1))
     );
     const [totalDays, setTotalDays] = useState(0);
     const [workDays, setWorkDays] = useState(0);
     const [nextHolliday, setNextHolliday] = useState<Date | null>(null);
+    const [vacationDays, setVacationDays] = useState<number>(
+        Number(localStorage.getItem("setVacDays")) || 0
+    );
     const [position, setPostion] = useState<{ y: number; x: number }>({
         y: 0,
         x: 0,
     });
 
-    
-    const ref = useRef<Date | null>(null) // fix stale state
-    ref.current = nextHolliday // fix stale state
+    const ref = useRef<Date | null>(null); // fix stale state
+    ref.current = nextHolliday; // fix stale state
 
     function handleShowDateForm(e: React.FormEvent) {
         setShowDateForm(!showDateForm);
@@ -149,7 +154,7 @@ function App() {
                             hollidays.includes(dayMonthString)) ||
                         easterDates.includes(easterString)
                     ) {
-                        ref.current = new Date(currentDate) // fix stale state
+                        ref.current = new Date(currentDate); // fix stale state
                         setNextHolliday(new Date(currentDate));
                     }
                 }
@@ -161,24 +166,54 @@ function App() {
     );
 
     return (
-        <div className="relative lg:w-[38rem] lg:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl lg:gap-0 gap-11 p-[1rem] transition-all duration-2000 border-1 border-stone-700 text-stone-900">
+        <div className="relative lg:w-[40rem] lg:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl lg:gap-0 gap-11 p-[1rem] transition-all duration-2000 lg:border-1 border-stone-700 text-violet-950">
             <Title />
+            <div className="divide-y-1 divide-stone-700">
 
-            <div className="flex gap-10">
+            <div className="flex gap-10 justify-center items-center">
                 <DisplayResult
                     result={selectedDate.getTime() > Date.now() ? totalDays : 0}
                     // result={totalDays}
-                    text="Vseh dni:"
-                />
-                <DisplayResult result={workDays} text="Delovnikov:" />
+                    text="Vseh dni"
+                    />
+                <DisplayResult
+                    result={workDays - vacationDays}
+                    text="Delovnikov"
+                    />
             </div>
 
             <NextHolliday>{nextHolliday}</NextHolliday>
             <DisplayDate selectedDate={selectedDate} />
-            <ButtonTarget
-                showDateForm={showDateForm}
-                onClick={(e)=> handleShowDateForm(e)}
-            />
+            <div className="flex gap-2">
+                <ButtonTarget
+                    showDateForm={showDateForm}
+                    onClick={(e) => handleShowDateForm(e)}
+                    />
+                {!showVacationInput && (
+                    <ButtonDopust
+                    vacationDays={vacationDays}
+                    onClick={() => setShowVacationInput(true)}
+                    />
+                )}
+                {showVacationInput && (
+                    <VacationInput
+                    vacationDays={vacationDays}
+                    setVacationDays={setVacationDays}
+                    >
+                        <button
+                            className="cursor-pointer hover:bg-[#994977] border-1 border-stone-700 rounded-lg px-2 py-1"
+                            onClick={() => {
+                                setShowVacationInput(false);
+                                if(!vacationDays || vacationDays<0) setVacationDays(0)
+                                else setVacationDays(vacationDays*1)
+                                }}
+                            >
+                            ✔
+                        </button>
+                    </VacationInput>
+                )}
+                </div>
+            </div>
 
             {/* Modal */}
             {showDateForm && (
