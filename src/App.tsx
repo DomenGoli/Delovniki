@@ -166,11 +166,11 @@ function App() {
     );
 
     return (
-        <div className="relative sm:w-[40rem] min-w-[100%] sm:min-h-0 min-h-full sm:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl sm:gap-0 gap-11 p-[1rem] transition-all duration-2000 sm:border-1 border-stone-700 text-violet-950">
+        <div className="relative lg:w-[40rem] min-w-[100%] sm:min-h-0 min-h-[100vh] sm:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl lg:gap-0 gap-11 p-[1rem] transition-all duration-2000 lg:border-1 border-stone-700 text-violet-950">
             <Title />
             <div className="divide-y-1 divide-stone-700">
 
-            <div className="flex gap-6 sm:gap-10 justify-center items-center">
+            <div className="flex gap-6 lg:gap-10 justify-center items-center">
                 <DisplayResult
                     result={selectedDate.getTime() > Date.now() ? totalDays : 0}
                     // result={totalDays}
@@ -184,7 +184,7 @@ function App() {
 
             <NextHolliday>{nextHolliday}</NextHolliday>
             <DisplayDate selectedDate={selectedDate} />
-            <div className="flex gap-0 sm:gap-2 flex-col sm:flex-row pt-3 sm:pt-0 items-center">
+            <div className="flex gap-0 lg:gap-2 flex-col lg:flex-row pt-3 lg:pt-0 items-center">
                 <ButtonTarget
                     showDateForm={showDateForm}
                     onClick={(e) => handleShowDateForm(e)}
