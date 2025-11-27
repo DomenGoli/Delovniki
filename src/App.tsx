@@ -166,7 +166,7 @@ function App() {
     );
 
     return (
-        <div className="relative lg:w-[40rem] min-w-[100%] sm:min-h-0 min-h-[100vh] sm:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl lg:gap-0 gap-11 p-[1rem] transition-all duration-2000 lg:border-1 border-stone-700 text-violet-950">
+        <div className="relative lg:w-[40rem] overflow-auto min-w-[100%] sm:min-h-0 min-h-[100vh] sm:h-[35rem] w-[100%] h-[100vh] lg:bg-white/5 flex flex-col items-center rounded-2xl shadow-2xl lg:gap-0 gap-11 p-[1rem] transition-all duration-2000 lg:border-1 border-stone-700 text-violet-950">
             <Title />
             <div className="divide-y-1 divide-stone-700">
 
